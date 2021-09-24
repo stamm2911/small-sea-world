@@ -2,9 +2,9 @@
   color: aqua;
 }
 
-main{
+body{
     background-color: gray;
-    height: 500px;
+    /* height: 500px; */
     display: flex;
     justify-content: center;
 }
