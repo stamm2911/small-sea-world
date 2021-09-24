@@ -1,9 +1,11 @@
-
+import Grid from "./components/Grid";
 
 function App() {
   return (
     <div className="App">
-      Hello welt!
+      <main>
+        <Grid />
+      </main>
     </div>
   );
 }

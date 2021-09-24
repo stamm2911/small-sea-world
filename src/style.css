@@ -1,3 +1,27 @@
 * {
   color: aqua;
 }
+
+main{
+    background-color: green;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+}
+
+img {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+
+table{
+    height: 300px;
+    width: 300px;
+}
+
+td{
+    padding: 0;
+    margin: 0;
+    background-color: red;
+}
