@@ -1,13 +1,58 @@
 * {
-  color: aqua;
+  /* color: rgb(0, 100, 158); */
 }
 
-body{
-    background-color: gray;
-    /* height: 500px; */
-    display: flex;
-    justify-content: center;
+body {
+  background-color: gray;
+  /* height: 500px; */
+  display: flex;
+  /* justify-content: center; */
 }
+
+header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 2, 109, 0.8);
+  height: 200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgb(0, 236, 236);
+  /* justify-content: center; */
+}
+
+section{
+  /* background-color: red; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+h1 {
+  /* align-self: flex-start; */
+}
+
+h2{
+  font-size: 250%;
+  margin: 0 5px 0 5px;
+}
+
+button {
+  width: 50px;
+  height: 15px;
+  margin: 0 5px 0 5px;
+  /* color: black; */
+  /* align-self: flex-end; */
+}
+
+main {
+  margin-top: 200px;
+  /* margin-left: 50px; */
+}
+
+
 
 img {
   height: 100px;
@@ -15,13 +60,21 @@ img {
   object-fit: cover;
 }
 
-table{
-    height: 300px;
-    width: 300px;
+table {
+  width: fit-content;
+  height: fit-content;
 }
 
-td{
-    padding: 0;
-    margin: 0;
-    background-color: green;
+tr {
+  border: 0;
+}
+
+td {
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  background-color: red;
+  /* width: 100px; */
+  /* height: fit-content; */
+  /* background-image: url('./img/sea-draw2.jpg'); */
 }

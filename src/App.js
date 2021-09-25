@@ -1,11 +1,16 @@
 import Grid from "./components/Grid";
+import ControlPanel from "./components/ControlPanel";
+import { GridProvider } from "./utils/GridContext";
 
 function App() {
   return (
-    <div className="App">
-      {/* <main> */}
+    <div>
+      <GridProvider>
+        <ControlPanel />
         <Grid />
-      {/* </main> */}
+        <Grid />
+        <Grid />
+      </GridProvider>
     </div>
   );
 }
