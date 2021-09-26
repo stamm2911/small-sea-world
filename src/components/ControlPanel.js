@@ -2,7 +2,7 @@ import { useGridContext } from "../utils/GridContext";
 import Button from "./Button";
 
 function ControlPanel() {
-  const { gridState, addColumn, removeColumn, addRow, removeRow } =
+  const { addColumn, removeColumn, addRow, removeRow } =
     useGridContext();
 
   return (
