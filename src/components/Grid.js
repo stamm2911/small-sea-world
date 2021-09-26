@@ -1,48 +1,36 @@
 // import { useEffect, useMemo, useState } from "react";
 import { useGridContext } from "../utils/GridContext";
 import { v4 as uuidv4 } from "uuid";
-
-import sea from "../img/sea-draw2.jpg";
-import land from "../img/land.JPG";
+import Cell from "./Cell";
 
 function Grid() {
-  const { gridState, toggled } = useGridContext();
+  const { gridState } = useGridContext();
 
-  // function matrixGenerator(cols, rows) {
-  //   const arr = new Array(cols);
-  //   for (let i = 0; i < arr.length; i++) {
-  //     arr[i] = new Array(rows);
-  //   }
-  //   return arr;
-  // }
+  const matrixGenerator = () => {
+    return gridState.map((rowCell, rowIndex) => {
+      return (
+        <tr key={uuidv4()}>
+          {rowCell.map((columnCell, coloumnIndex) => {
+            return (
+              <td key={uuidv4()}>
+              {/* {console.log(columnCell)} */}
+                <Cell
+                  columnCell={columnCell}
+                  rowIndex={rowIndex}
+                  coloumnIndex={coloumnIndex}
+                />
+              </td>
+            );
+          })}
+        </tr>
+      );
+    });
+  };
 
   return (
     <main>
       <table>
-        <tbody>
-          {gridState.map((rowCell, rowIndex) => {
-            return (
-              <tr key={uuidv4()}>
-                {rowCell.map((columnCell, coloumnIndex) => {
-                  return (
-                    <td
-                      key={uuidv4()}
-                      onClick={() =>
-                        toggled(columnCell, rowIndex, coloumnIndex)
-                      }
-                    >
-                      {columnCell ? (
-                        <img src={land} alt="pic" />
-                      ) : (
-                        <img src={sea} alt="pic" />
-                      )}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
+        <tbody>{matrixGenerator()}</tbody>
       </table>
     </main>
   );

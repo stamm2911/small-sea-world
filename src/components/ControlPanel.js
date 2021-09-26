@@ -2,7 +2,7 @@ import { useGridContext } from "../utils/GridContext";
 import Button from "./Button";
 
 function ControlPanel() {
-  const { addColumn, removeColumn, addRow, removeRow } =
+  const { addColumn, removeColumn, addRow, removeRow, islandCountState, landCountState } =
     useGridContext();
 
   return (
@@ -21,8 +21,8 @@ function ControlPanel() {
       <aside>
         <h2><u>Data:</u></h2>
         <ul>
-          <li>- Land Cells: 10</li>
-          <li>- Total Islands: 10</li>
+          <li>- Land Cells: {landCountState}</li>
+          <li>- Total Islands: {islandCountState}</li>
         </ul>
       </aside>
     </header>
