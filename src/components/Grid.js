@@ -11,7 +11,7 @@ function Grid() {
   //     [false, true, false],
   //     [false, false, false],
   //   ];
-  const { gridState, addColumn, removeColumn } = useGridContext();
+  const { gridState, addColumn, removeColumn, toggled } = useGridContext();
 
   // const [gridState, setGridState] = useState([
   //   [false, false, false],
@@ -28,31 +28,21 @@ function Grid() {
     return arr;
   }
 
-  //   const matrix = matrixGenerator(3,3)
-  //   console.log(matrix.length)
-
-  const toggle = (item2) => {
-    console.log(item2);
-  };
-
   return (
     <main>
-      {/* <button>&gt;</button> */}
       <table>
         <tbody>
-          {gridState.map((rowCell) => {
+          {gridState.map((rowCell, rowIndex) => {
             return (
               <tr key={uuidv4()}>
-                {rowCell.map((columnCell) => {
+                {rowCell.map((columnCell, coloumnIndex) => {
                   return (
-                    <td key={uuidv4()}>
+                    <td key={uuidv4()} onClick={() => toggled(columnCell, rowIndex, coloumnIndex)}>
                       {columnCell ? (
                         <img src={land} alt="pic" />
                       ) : (
                         <img src={sea} alt="pic" />
                       )}
-                      {/* <img src={sea} alt="pic" /> */}
-                      {/* {item2} */}
                     </td>
                   );
                 })}

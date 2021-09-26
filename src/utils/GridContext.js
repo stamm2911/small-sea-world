@@ -12,6 +12,13 @@ export const GridProvider = ({ children }) => {
   ]);
   console.log(gridState);
 
+  function toggled(cellValue, rowIndex, coloumnIndex) {
+    const matrix = [...gridState];
+    matrix[rowIndex][coloumnIndex] = !matrix[rowIndex][coloumnIndex];
+    setGridState(matrix);
+    // console.log(rowIndex);
+  }
+
   function addColumn() {
     const matrix = [...gridState];
     matrix.forEach((columnCell) => {
@@ -22,14 +29,36 @@ export const GridProvider = ({ children }) => {
 
   function removeColumn() {
     const matrix = [...gridState];
-    matrix.forEach((columnCell) => {
-      columnCell.pop();
-    });
+    if (matrix[0].length > 1) {
+      matrix.forEach((columnCell) => {
+        columnCell.pop();
+      });
+      setGridState(matrix);
+    }
+  }
+
+  function addRow() {
+    const matrix = [...gridState];
+    matrix.push(
+      matrix[0].map((rowCell) => {
+        return false;
+      })
+    );
     setGridState(matrix);
   }
 
+  function removeRow() {
+    const matrix = [...gridState];
+    if (matrix.length > 1) {
+      matrix.pop();
+      setGridState(matrix);
+    }
+  }
+
   return (
-    <GridContext.Provider value={{ gridState, addColumn, removeColumn }}>
+    <GridContext.Provider
+      value={{ gridState, addColumn, removeColumn, addRow, removeRow, toggled }}
+    >
       {children}
     </GridContext.Provider>
   );

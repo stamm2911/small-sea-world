@@ -8,8 +8,6 @@ function App() {
       <GridProvider>
         <ControlPanel />
         <Grid />
-        <Grid />
-        <Grid />
       </GridProvider>
     </div>
   );
