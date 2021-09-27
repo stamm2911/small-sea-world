@@ -121,7 +121,7 @@ export const GridProvider = ({ children }) => {
   //     console.log(islandTotalCount - 1);
   //   }
 
-  function addIsland(cellValue, rowIndex, coloumnIndex) {
+  function islandCounter(cellValue, rowIndex, coloumnIndex) {
     let islandCount = islandCountState;
     let landCount = landCountState
 
@@ -134,14 +134,14 @@ export const GridProvider = ({ children }) => {
     const c6 = gridState[rowIndex + 1][coloumnIndex - 1];
     const c7 = gridState[rowIndex][coloumnIndex - 1];
     
-    console.log(c0);
-    console.log(c1);
-    console.log(c2);
-    console.log(c3);
-    console.log(c4);
-    console.log(c5);
-    console.log(c6);
-    console.log(c7);
+    // console.log(c0);
+    // console.log(c1);
+    // console.log(c2);
+    // console.log(c3);
+    // console.log(c4);
+    // console.log(c5);
+    // console.log(c6);
+    // console.log(c7);
 
     // console.log('islandCountccc',islandCount)
     // console.log(
@@ -161,82 +161,120 @@ export const GridProvider = ({ children }) => {
     if (!cellValue) {
         landCount++
       if (
-        !gridState[rowIndex - 1][coloumnIndex] &&
-        !gridState[rowIndex][coloumnIndex + 1] &&
-        !gridState[rowIndex + 1][coloumnIndex] &&
-        !gridState[rowIndex][coloumnIndex - 1]
+        !gridState[rowIndex === 0? 0 : rowIndex - 1][coloumnIndex] &&
+        !gridState[rowIndex][coloumnIndex === 0? 0 : coloumnIndex + 1] &&
+        !gridState[rowIndex === gridState.length-1? gridState.length-1 : rowIndex + 1][coloumnIndex] &&
+        !gridState[rowIndex][coloumnIndex === 0? 0 : coloumnIndex - 1]
       ) {
         islandCount++;
         setIslandCountState(islandCount);
-      } else if((!c0 && c1 && !c2 && c3 && !c4 && c5 && !c6 && c7)){
-        islandCount = islandCount -3
+    //   } else if(
+    //       (
+    //         gridState[rowIndex - 1][coloumnIndex] &&
+    //         !gridState[rowIndex][coloumnIndex + 1] &&
+    //         !gridState[rowIndex + 1][coloumnIndex] &&
+    //         !gridState[rowIndex][coloumnIndex - 1]
+    //       )||
+    //       (
+    //         !gridState[rowIndex - 1][coloumnIndex] &&
+    //         gridState[rowIndex][coloumnIndex + 1] &&
+    //         !gridState[rowIndex + 1][coloumnIndex] &&
+    //         !gridState[rowIndex][coloumnIndex - 1]
+    //       )||
+    //       (
+    //         !gridState[rowIndex - 1][coloumnIndex] &&
+    //         !gridState[rowIndex][coloumnIndex + 1] &&
+    //         gridState[rowIndex + 1][coloumnIndex] &&
+    //         !gridState[rowIndex][coloumnIndex - 1]
+    //       )||
+    //       (
+    //         !gridState[rowIndex - 1][coloumnIndex] &&
+    //         !gridState[rowIndex][coloumnIndex + 1] &&
+    //         !gridState[rowIndex + 1][coloumnIndex] &&
+    //         gridState[rowIndex][coloumnIndex - 1]
+    //       )
+    //   ){
+    //     console.log()
+      } else{
+        // islandCount--
+      }
 
-      }else if (
-        // (!c0 && !c1 && !c2 && !c3 && !c4 && !c5 && !c6 && !c7)
-        (!c0 && c1 && !c2 && c3 && !c4 && !c5 && !c6 && c7) || 
-        (!c0 && c1 && !c2 && c3 && !c4 && !c5 && c6 && c7) || 
-        (!c0 && c1 && !c2 && c3 && c4 && !c5 && !c6 && c7) || 
-        (!c0 && c1 && !c2 && c3 && c4 && !c5 && c6 && c7) || 
+
+    //   else if((!c0 && c1 && !c2 && c3 && !c4 && c5 && !c6 && c7)){
+    //     islandCount = islandCount -3
+
+    //   }else if (
+    //     // (!c0 && !c1 && !c2 && !c3 && !c4 && !c5 && !c6 && !c7)
+    //     (!c0 && c1 && !c2 && c3 && !c4 && !c5 && !c6 && c7) || 
+    //     (!c0 && c1 && !c2 && c3 && !c4 && !c5 && c6 && c7) || 
+    //     (!c0 && c1 && !c2 && c3 && c4 && !c5 && !c6 && c7) || 
+    //     (!c0 && c1 && !c2 && c3 && c4 && !c5 && c6 && c7) || 
 
 
-        (!c0 && !c1 && !c2 && c3 && !c4 && c5 && !c6 && c7) || 
-        (!c0 && !c1 && c2 && c3 && !c4 && c5 && !c6 && c7) || 
-        (c0 && !c1 && !c2 && c3 && !c4 && c5 && !c6 && c7) || 
-        (c0 && !c1 && c2 && c3 && !c4 && c5 && !c6 && c7) || 
+    //     (!c0 && !c1 && !c2 && c3 && !c4 && c5 && !c6 && c7) || 
+    //     (!c0 && !c1 && c2 && c3 && !c4 && c5 && !c6 && c7) || 
+    //     (c0 && !c1 && !c2 && c3 && !c4 && c5 && !c6 && c7) || 
+    //     (c0 && !c1 && c2 && c3 && !c4 && c5 && !c6 && c7) || 
 
 
-        (!c0 && c1 && !c2 && c3 && !c4 && c5 && !c6 && !c7) || 
-        (c0 && c1 && !c2 && c3 && !c4 && c5 && !c6 && !c7) || 
-        (!c0 && c1 && !c2 && c3 && !c4 && c5 && c6 && !c7) || 
-        (c0 && c1 && !c2 && c3 && !c4 && c5 && c6 && !c7) || 
+    //     (!c0 && c1 && !c2 && c3 && !c4 && c5 && !c6 && !c7) || 
+    //     (c0 && c1 && !c2 && c3 && !c4 && c5 && !c6 && !c7) || 
+    //     (!c0 && c1 && !c2 && c3 && !c4 && c5 && c6 && !c7) || 
+    //     (c0 && c1 && !c2 && c3 && !c4 && c5 && c6 && !c7) || 
 
 
-        (!c0 && c1 && !c2 && !c3 && !c4 && c5 && !c6 && c7) || 
-        (!c0 && c1 && c2 && !c3 && !c4 && c5 && !c6 && c7) || 
-        (!c0 && c1 && !c2 && !c3 && c4 && c5 && !c6 && c7) || 
-        (!c0 && c1 && c2 && !c3 && c4 && c5 && !c6 && c7)
-      ) {
-        islandCount = islandCount -2
-      } else if(
-          (!c0 && c1 && !c2 && c3 && !c4 && !c5 && !c6 && !c7) ||
-          (!c0 && c1 && !c2 && !c3 && !c4 && c5 && !c6 && !c7) ||
-          (!c0 && c1 && !c2 && !c3 && !c4 && !c5 && !c6 && c7) ||
-          (!c0 && c1 && !c2 && !c3 && !c4 && !c5 && !c6 && c7) ||
-          (!c0 && !c1 && !c2 && c3 && !c4 && c5 && !c6 && !c7) ||
-          (!c0 && !c1 && !c2 && c3 && !c4 && !c5 && !c6 && c7) ||
-          (!c0 && !c1 && !c2 && !c3 && !c4 && c5 && !c6 && c7) ||
-          (!c0 && !c1 && c2 && c3 && !c4 && c5 && !c6 && c7) ||
-          (!c0 && c1 && !c2 && c3 && c4 && !c5 && !c6 && !c7) ||
-          (!c0 && c1 && c2 && c3 && !c4 && c5 && c6 && c7) ||
-          (c0 && !c1 && !c2 && !c3 && !c4 && c5 && !c6 && c7) ||
-          (c0 && c1 && !c2 && c3 && !c4 && !c5 && !c6 && !c7) ||
-          (!c0 && !c1 && !c2 && !c3 && !c4 && !c5 && !c6 && !c7) ||
-          (!c0 && c1 && c2 && !c3 && !c4 && !c5 && !c6 && c7) ||
-          (!c0 && c1 && c2 && c3 && c4 && !c5 && !c6 && c7) ||
-          (c0 && c1 && !c2 && c3 && !c4 && !c5 && c6 && c7) ||
-          (!c0 && c1 && c2 && c3 && !c4 && !c5 && !c6 && c7) ||
-          (c0 && c1 && !c2 && c3 && !c4 && !c5 && !c6 && c7) ||
-          (!c0 && !c1 && !c2 && c3 && c4 && c5 && !c6 && c7) ||
-          (!c0 && !c1 && !c2 && c3 && !c4 && c5 && c6 && c7) ||
-          (!c0 && !c1 && c2 && c3 && c4 && c5 && !c6 && c7) ||
-          (c0 && !c1 && !c2 && c3 && !c4 && c5 && c6 && c7) ||
-          (c0 && c1 && c2 && !c3 && c4 && c5 && c6 && !c7)||
-          (c0 && !c1 && c2 && c3 && c4 && !c5 && c6 && c7)
-      )
+    //     (!c0 && c1 && !c2 && !c3 && !c4 && c5 && !c6 && c7) || 
+    //     (!c0 && c1 && c2 && !c3 && !c4 && c5 && !c6 && c7) || 
+    //     (!c0 && c1 && !c2 && !c3 && c4 && c5 && !c6 && c7) || 
+    //     (!c0 && c1 && c2 && !c3 && c4 && c5 && !c6 && c7)
+    //   ) {
+    //     islandCount = islandCount -2
+    //   } else if(
+    //       (!c0 && c1 && !c2 && c3 && !c4 && !c5 && !c6 && !c7) ||
+    //       (!c0 && c1 && !c2 && !c3 && !c4 && c5 && !c6 && !c7) ||
+    //       (!c0 && c1 && !c2 && !c3 && !c4 && !c5 && !c6 && c7) ||
+    //       (!c0 && c1 && !c2 && !c3 && !c4 && !c5 && !c6 && c7) ||
+    //       (!c0 && !c1 && !c2 && c3 && !c4 && c5 && !c6 && !c7) ||
+    //       (!c0 && !c1 && !c2 && c3 && !c4 && !c5 && !c6 && c7) ||
+    //       (!c0 && !c1 && !c2 && !c3 && !c4 && c5 && !c6 && c7) ||
+    //       (!c0 && !c1 && c2 && c3 && !c4 && c5 && !c6 && c7) ||
+    //       (!c0 && c1 && !c2 && c3 && c4 && !c5 && !c6 && !c7) ||
+    //       (!c0 && c1 && c2 && c3 && !c4 && c5 && c6 && c7) ||
+    //       (c0 && !c1 && !c2 && !c3 && !c4 && c5 && !c6 && c7) ||
+    //       (c0 && c1 && !c2 && c3 && !c4 && !c5 && !c6 && !c7) ||
+    //       (!c0 && !c1 && !c2 && !c3 && !c4 && !c5 && !c6 && !c7) ||
+    //       (!c0 && c1 && c2 && !c3 && !c4 && !c5 && !c6 && c7) ||
+    //       (!c0 && c1 && c2 && c3 && c4 && !c5 && !c6 && c7) ||
+    //       (c0 && c1 && !c2 && c3 && !c4 && !c5 && c6 && c7) ||
+    //       (!c0 && c1 && c2 && c3 && !c4 && !c5 && !c6 && c7) ||
+    //       (c0 && c1 && !c2 && c3 && !c4 && !c5 && !c6 && c7) ||
+    //       (!c0 && !c1 && !c2 && c3 && c4 && c5 && !c6 && c7) ||
+    //       (!c0 && !c1 && !c2 && c3 && !c4 && c5 && c6 && c7) ||
+    //       (!c0 && !c1 && c2 && c3 && c4 && c5 && !c6 && c7) ||
+    //       (c0 && !c1 && !c2 && c3 && !c4 && c5 && c6 && c7) ||
+    //       (c0 && c1 && c2 && !c3 && c4 && c5 && c6 && !c7)||
+    //       (c0 && !c1 && c2 && c3 && c4 && !c5 && c6 && c7)
+    //   )
       
        
-      {
-        islandCount--
-      }
+    //   {
+    //     islandCount--
+    //   }
     } else {
         landCount--
+        if((!c1 && !c3  && !c5  && !c7)){
+            islandCount--
+        }
     }
     setLandCountState(landCount)
-    setIslandCountState(islandCount);    
+    setIslandCountState(islandCount); 
+    
+    
+    
   }
 
   function toggled(cellValue, rowIndex, coloumnIndex) {
-    addIsland(cellValue, rowIndex, coloumnIndex);
+    islandCounter(cellValue, rowIndex, coloumnIndex);
     const matrix = [...gridState];
     matrix[rowIndex][coloumnIndex] = !matrix[rowIndex][coloumnIndex];
     setGridState(matrix);
