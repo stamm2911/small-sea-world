@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/small-sea-world/static/css/main.c5d069aa.chunk.css",
-    "main.js": "/small-sea-world/static/js/main.68e2d7f9.chunk.js",
-    "main.js.map": "/small-sea-world/static/js/main.68e2d7f9.chunk.js.map",
+    "main.css": "/small-sea-world/static/css/main.711df632.chunk.css",
+    "main.js": "/small-sea-world/static/js/main.5d82bc46.chunk.js",
+    "main.js.map": "/small-sea-world/static/js/main.5d82bc46.chunk.js.map",
     "runtime-main.js": "/small-sea-world/static/js/runtime-main.747f5cbe.js",
     "runtime-main.js.map": "/small-sea-world/static/js/runtime-main.747f5cbe.js.map",
     "static/js/2.ac450ad1.chunk.js": "/small-sea-world/static/js/2.ac450ad1.chunk.js",
@@ -10,15 +10,14 @@
     "static/js/3.79dce348.chunk.js": "/small-sea-world/static/js/3.79dce348.chunk.js",
     "static/js/3.79dce348.chunk.js.map": "/small-sea-world/static/js/3.79dce348.chunk.js.map",
     "index.html": "/small-sea-world/index.html",
-    "static/css/main.c5d069aa.chunk.css.map": "/small-sea-world/static/css/main.c5d069aa.chunk.css.map",
+    "static/css/main.711df632.chunk.css.map": "/small-sea-world/static/css/main.711df632.chunk.css.map",
     "static/js/2.ac450ad1.chunk.js.LICENSE.txt": "/small-sea-world/static/js/2.ac450ad1.chunk.js.LICENSE.txt",
-    "static/media/land.fe05402f.JPG": "/small-sea-world/static/media/land.fe05402f.JPG",
     "static/media/sea-draw2.5c7b8966.jpg": "/small-sea-world/static/media/sea-draw2.5c7b8966.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.747f5cbe.js",
     "static/js/2.ac450ad1.chunk.js",
-    "static/css/main.c5d069aa.chunk.css",
-    "static/js/main.68e2d7f9.chunk.js"
+    "static/css/main.711df632.chunk.css",
+    "static/js/main.5d82bc46.chunk.js"
   ]
 }
