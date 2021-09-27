@@ -5,35 +5,23 @@ const GridContext = createContext();
 export const useGridContext = () => useContext(GridContext);
 
 export const GridProvider = ({ children }) => {
-    const [gridState, setGridState] = useState([
-      [false, false, false, false, false, false, false, false, false, false],
-      [false, true, true, true, false, false, false, false, false, false],
-      [false, true, true, true, false, false, false, false, false, false],
-      [false, true, true, true, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false, false, false],
-      [false, false, false, false, true, false, false, true, true, false],
-      [false, false, false, false, true, false, false, true, true, false],
-      [false, false, false, false, true, true, true, true, true, false],
-      [false, true, true, true, true, true, true, true, true, false],
-      [false, true, true, true, true, true, true, true, true, false],
-    ]);
-//   const [gridState, setGridState] = useState([
-//     [false, false, false, false, false, false, false, false, false, false],
-//     [false, false, false, false, false, false, false, false, false, false],
-//     [false, false, false, false, false, false, false, false, false, false],
-//     [false, false, false, false, false, false, false, false, false, false],
-//     [false, false, false, false, false, false, false, false, false, false],
-//     [false, false, false, false, false, false, false, false, false, false],
-//     [false, false, false, false, false, false, false, false, false, false],
-//     [false, false, false, false, false, false, false, false, false, false],
-//     [false, false, false, false, false, false, false, false, false, false],
-//     [false, false, false, false, false, false, false, false, false, false],
-//   ]);
+  const [gridState, setGridState] = useState([
+    [false, false, false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false, false, false],
+  ]);
+  const [islasTotalesState, setIslasTotalesState] = useState(0);
+  const [landState, setlandState] = useState(0);
   var islandTotalCount = 1;
   useEffect(islandCount, [gridState, islandTotalCount]);
 
   function islandCount() {
-    const equivalency = [];
+    let equivalency = [];
+    let islasTotalesState2 = [];
     const matrix = [...gridState];
     matrix.forEach((rowCell, rowIndex) => {
       return rowCell.forEach((columnCell, coloumnIndex) => {
@@ -97,29 +85,43 @@ export const GridProvider = ({ children }) => {
       });
     });
     // console.log(matrix);
+    equivalency = equivalency.reverse();
     matrix.forEach((rowCell, rowIndex) => {
       return rowCell.forEach((columnCell, coloumnIndex) => {
-        for (let i = equivalency.length - 1; i >= 0; i--) {
-          if (columnCell === equivalency[i][0]) {
-            console.log('i',i,equivalency[i]);
+        for (let i = 0; i < equivalency.length; i++) {
+          if (matrix[rowIndex][coloumnIndex] === equivalency[i][0]) {
+            console.log("eq:", equivalency);
+            console.log(
+              `matrix[${rowIndex}][${coloumnIndex}]=${columnCell}`,
+              equivalency[i]
+            );
             matrix[rowIndex][coloumnIndex] = equivalency[i][1];
+            console.log(
+              `matrix[${rowIndex}][${coloumnIndex}]=${matrix[rowIndex][coloumnIndex]}`
+            );
           }
         }
-
-        // equivalency.forEach((eq) => {
-        //     if (columnCell === eq[0]) {
-        //         matrix[rowIndex][coloumnIndex] = eq[1];
-        //     }
-        // });
       });
     });
     console.log(matrix);
-    console.log(equivalency);
-    console.log(islandTotalCount - 1);
+    matrix.forEach((row) => {
+      return row.forEach((cell) => {
+        if (cell) islasTotalesState2.push(cell);
+      });
+    });
+    const uniq = [...new Set(islasTotalesState2)];
+    console.log("islasTotalesState2", uniq);
+    console.log('islandiassssss',uniq.length)
+    // console.log(equivalency);
+    // console.log(islandTotalCount - 1);
+    setIslasTotalesState(uniq.length)
   }
 
   function toggled(cellValue, rowIndex, coloumnIndex) {
     const matrix = [...gridState];
+    let land = landState
+    cellValue? land-- : land++
+    setlandState(land) 
     matrix[rowIndex][coloumnIndex] = !matrix[rowIndex][coloumnIndex];
     setGridState(matrix);
   }
@@ -162,7 +164,7 @@ export const GridProvider = ({ children }) => {
 
   return (
     <GridContext.Provider
-      value={{ gridState, addColumn, removeColumn, addRow, removeRow, toggled }}
+      value={{ gridState, addColumn, removeColumn, addRow, removeRow, toggled, islasTotalesState, landState }}
     >
       {children}
     </GridContext.Provider>

@@ -68,13 +68,13 @@ main {
 }
 
 img {
-  height: 60px;
-  width: 60px;
+  height: 70px;
+  width: 70px;
   object-fit: cover;
 }
 
 table {
-  width: fit-content;
+  width: fit-max-content;
   height: fit-content;
 }
 
@@ -83,9 +83,11 @@ tr {
 }
 
 td {
-  text-decoration: none;
-  padding: 0;
-  margin: 0;
+  /* text-decoration: none; */
+  height: 70px;
+  width: 70px;
+  /* padding: 0;
+  margin: 0; */
   /* background-color: red; */
   cursor: pointer;
   /* width: 100px; */

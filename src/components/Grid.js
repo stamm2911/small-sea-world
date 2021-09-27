@@ -5,6 +5,18 @@ import { v4 as uuidv4 } from "uuid";
 import sea from "../img/sea-draw2.jpg";
 import land from "../img/land.JPG";
 
+const styles = {
+  sea: {
+    // height: '100',
+    // width:'100',
+    backgroundImage: `url(${sea})`,
+  },
+  land: {
+    background: 'green'
+  },
+};
+
+
 function Grid() {
   const { gridState, toggled } = useGridContext();
 
@@ -30,12 +42,13 @@ function Grid() {
                       onClick={() =>
                         toggled(columnCell, rowIndex, coloumnIndex)
                       }
+                      style={columnCell ? styles.land : styles.sea}
                     >
-                      {columnCell ? (
+                      {/* {columnCell ? (
                         <img src={land} alt="pic" />
                       ) : (
                         <img src={sea} alt="pic" />
-                      )}
+                      )} */}
                     </td>
                   );
                 })}
