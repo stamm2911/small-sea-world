@@ -1,13 +1,10 @@
 * {
-  /* color: rgb(0, 100, 158); */
   font-family: "Signika Negative", sans-serif;
 }
 
 body {
   background-color: gray;
-  /* height: 500px; */
   display: flex;
-  /* justify-content: center; */
 }
 
 header {
@@ -25,11 +22,9 @@ header {
   flex-direction: column;
   align-items: center;
   color: rgb(0, 236, 236);
-  /* justify-content: center; */
 }
 
 .btn-container {
-  /* background-color: red; */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -45,10 +40,6 @@ aside {
   line-height: 1.5;
 }
 
-h1 {
-  /* align-self: flex-start; */
-}
-
 h2 {
   font-size: 250%;
   margin: 0 5px 0 5px;
@@ -58,13 +49,10 @@ button {
   width: 50px;
   height: 15px;
   margin: 0 5px 0 5px;
-  /* color: black; */
-  /* align-self: flex-end; */
 }
 
 main {
   margin-top: 200px;
-  /* margin-left: 50px; */
 }
 
 img {
@@ -83,14 +71,7 @@ tr {
 }
 
 td {
-  /* text-decoration: none; */
   height: 70px;
   width: 70px;
-  /* padding: 0;
-  margin: 0; */
-  /* background-color: red; */
   cursor: pointer;
-  /* width: 100px; */
-  /* height: fit-content; */
-  /* background-image: url('./img/sea-draw2.jpg'); */
 }

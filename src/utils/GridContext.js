@@ -31,25 +31,21 @@ export const GridProvider = ({ children }) => {
               false &&
             matrix[rowIndex === 0 ? 0 : rowIndex - 1][coloumnIndex] === false
           ) {
-            // console.log("in0");
             matrix[rowIndex][coloumnIndex] = islandTotalCount;
             islandTotalCount++;
           } else if (
             matrix[rowIndex][coloumnIndex === 0 ? 0 : coloumnIndex - 1] &&
             coloumnIndex !== 0
           ) {
-            // console.log("in1");
             matrix[rowIndex][coloumnIndex] =
               matrix[rowIndex][coloumnIndex === 0 ? 0 : coloumnIndex - 1];
           } else if (
             matrix[rowIndex === 0 ? 0 : rowIndex - 1][coloumnIndex] &&
             rowIndex !== 0
           ) {
-            // console.log("in2");
             matrix[rowIndex][coloumnIndex] =
               matrix[rowIndex === 0 ? 0 : rowIndex - 1][coloumnIndex];
           } else {
-            // console.log("in3");
             matrix[rowIndex][coloumnIndex] = islandTotalCount;
             islandTotalCount++;
           }
@@ -63,7 +59,6 @@ export const GridProvider = ({ children }) => {
               matrix[rowIndex === 0 ? 0 : rowIndex - 1][coloumnIndex]
                 ? matrix[rowIndex][coloumnIndex === 0 ? 0 : coloumnIndex - 1]
                 : matrix[rowIndex === 0 ? 0 : rowIndex - 1][coloumnIndex];
-            // islandTotalCount --
 
             if (
               matrix[rowIndex][coloumnIndex === 0 ? 0 : coloumnIndex - 1] !==
@@ -84,7 +79,6 @@ export const GridProvider = ({ children }) => {
         }
       });
     });
-    // console.log(matrix);
     equivalency = equivalency.reverse();
     matrix.forEach((rowCell, rowIndex) => {
       return rowCell.forEach((columnCell, coloumnIndex) => {
@@ -111,17 +105,15 @@ export const GridProvider = ({ children }) => {
     });
     const uniq = [...new Set(islasTotalesState2)];
     console.log("islasTotalesState2", uniq);
-    console.log('islandiassssss',uniq.length)
-    // console.log(equivalency);
-    // console.log(islandTotalCount - 1);
-    setIslasTotalesState(uniq.length)
+    console.log("islandiassssss", uniq.length);
+    setIslasTotalesState(uniq.length);
   }
 
   function toggled(cellValue, rowIndex, coloumnIndex) {
     const matrix = [...gridState];
-    let land = landState
-    cellValue? land-- : land++
-    setlandState(land) 
+    let land = landState;
+    cellValue ? land-- : land++;
+    setlandState(land);
     matrix[rowIndex][coloumnIndex] = !matrix[rowIndex][coloumnIndex];
     setGridState(matrix);
   }
@@ -164,7 +156,16 @@ export const GridProvider = ({ children }) => {
 
   return (
     <GridContext.Provider
-      value={{ gridState, addColumn, removeColumn, addRow, removeRow, toggled, islasTotalesState, landState }}
+      value={{
+        gridState,
+        addColumn,
+        removeColumn,
+        addRow,
+        removeRow,
+        toggled,
+        islasTotalesState,
+        landState,
+      }}
     >
       {children}
     </GridContext.Provider>
