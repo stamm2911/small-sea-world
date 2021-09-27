@@ -21,7 +21,7 @@ The real-time data consist in 2 counters (Land Cells & Total Islands):
 - [Contribute](#contribute)
 - [Questions](#questions)
 ## Deployed App
-https://mighty-castle-38499.herokuapp.com/
+https://stamm2911.github.io/small-sea-world/
 ![Deployed application](/src/img/deployed-app.JPG)
 
 ## Usage
