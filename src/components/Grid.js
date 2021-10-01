@@ -33,14 +33,14 @@ function Grid() {
                     <td
                       key={uuidv4()}
                       style={styles.none}
-                    ></td> :
+                    >x</td> :
                     <td
                       key={uuidv4()}
                       onClick={() =>
                         toggled(columnCell, rowIndex, coloumnIndex)
                       }
                       style={columnCell ? styles.land : styles.sea}
-                    ></td> 
+                    >x</td> 
                   );
                 })}
               </tr>

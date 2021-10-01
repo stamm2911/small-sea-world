@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 const GridContext = createContext();
 
@@ -20,7 +20,6 @@ export const GridProvider = ({ children }) => {
   const [totalIslandArrayState, setTotalIslandArrayState] = useState([]);
 
   function islandCount(cellValue, rowIndex, coloumnIndex, land) {
-    let splitIsland = splitIslandState;
     const matrix = [...gridState];
     const totalIslandArray = [...totalIslandArrayState];
     const neighbourCellsArray = [];

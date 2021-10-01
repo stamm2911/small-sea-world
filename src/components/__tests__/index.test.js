@@ -2,10 +2,8 @@ import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
+import {GridProvider} from '../../utils/GridContext'
 import Grid from "../Grid";
-import GridContext from "../../utils/GridContext";
-import Button from '../Button'
-import ControlPanel from '../ControlPanel'
 
 let container = null;
 
@@ -20,30 +18,9 @@ afterEach(() => {
   container = null;
 });
 
-it("renders button", () => {
+it("Grid rendering", () => {
   act(() => {
-    render(<Grid GridContext={GridContext}/>, container);
+    render(<GridProvider><Grid /></GridProvider>, container);
   });
-  expect(container.textContent).toBe('');
-
-  //   act(() => {
-  //     render(<Welcome name="Xander" topic="React" />, container);
-  //   });
-  //   expect(container.textContent).toBe(
-  //     'Welcome, Xander! We hope you learn a lot about React.'
-  //   );
-
-  //   act(() => {
-  //     render(<Welcome name="Tammer" topic="Mocks" />, container);
-  //   });
-  //   expect(container.textContent).toBe(
-  //     'Welcome, Tammer! We hope you learn a lot about Mocks.'
-  //   );
-
-  //   act(() => {
-  //     render(<Welcome name="Grace" />, container);
-  //   });
-  //   expect(container.textContent).toBe(
-  //     'Welcome, Grace! We hope you learn a lot about Web Development.'
-  //   );
+  expect(container.textContent).toBe("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 });
