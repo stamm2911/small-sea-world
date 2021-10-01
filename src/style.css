@@ -1,10 +1,15 @@
 * {
   font-family: "Signika Negative", sans-serif;
+  scroll-behavior: smooth;
 }
 
 body {
   background-color: gray;
   display: flex;
+  /* width: 100%; */
+  margin: 0 70px 0 70px;
+  display: flex;
+  justify-content: center;
 }
 
 header {
@@ -62,7 +67,7 @@ img {
 }
 
 table {
-  width: fit-max-content;
+  /* width: fit-max-content; */
   height: fit-content;
 }
 
@@ -73,5 +78,5 @@ tr {
 td {
   height: 70px;
   width: 70px;
-  cursor: pointer;
+  color: transparent;
 }

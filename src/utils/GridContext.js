@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 const GridContext = createContext();
 
@@ -14,108 +14,211 @@ export const GridProvider = ({ children }) => {
     [false, false, false, false, false, false, false, false, false, false],
     [false, false, false, false, false, false, false, false, false, false],
   ]);
-  const [islasTotalesState, setIslasTotalesState] = useState(0);
   const [landState, setlandState] = useState(0);
-  var islandTotalCount = 1;
-  useEffect(islandCount, [gridState, islandTotalCount]);
+  const [islasTotalesState, setIslasTotalesState] = useState(0);
+  const [splitIslandState, setSplitIslandState] = useState(101);
+  const [totalIslandArrayState, setTotalIslandArrayState] = useState([]);
 
-  function islandCount() {
-    let equivalency = [];
-    let islasTotalesState2 = [];
+  function islandCount(cellValue, rowIndex, coloumnIndex, land) {
     const matrix = [...gridState];
-    matrix.forEach((rowCell, rowIndex) => {
-      return rowCell.forEach((columnCell, coloumnIndex) => {
-        if (columnCell) {
-          if (
-            matrix[rowIndex][coloumnIndex === 0 ? 0 : coloumnIndex - 1] ===
-              false &&
-            matrix[rowIndex === 0 ? 0 : rowIndex - 1][coloumnIndex] === false
-          ) {
-            matrix[rowIndex][coloumnIndex] = islandTotalCount;
-            islandTotalCount++;
-          } else if (
-            matrix[rowIndex][coloumnIndex === 0 ? 0 : coloumnIndex - 1] &&
-            coloumnIndex !== 0
-          ) {
-            matrix[rowIndex][coloumnIndex] =
-              matrix[rowIndex][coloumnIndex === 0 ? 0 : coloumnIndex - 1];
-          } else if (
-            matrix[rowIndex === 0 ? 0 : rowIndex - 1][coloumnIndex] &&
-            rowIndex !== 0
-          ) {
-            matrix[rowIndex][coloumnIndex] =
-              matrix[rowIndex === 0 ? 0 : rowIndex - 1][coloumnIndex];
-          } else {
-            matrix[rowIndex][coloumnIndex] = islandTotalCount;
-            islandTotalCount++;
-          }
+    const totalIslandArray = [...totalIslandArrayState];
+    const neighbourCellsArray = [];
 
-          if (
-            matrix[rowIndex][coloumnIndex === 0 ? 0 : coloumnIndex - 1] &&
-            matrix[rowIndex === 0 ? 0 : rowIndex - 1][coloumnIndex]
-          ) {
-            matrix[rowIndex][coloumnIndex] =
-              matrix[rowIndex][coloumnIndex === 0 ? 0 : coloumnIndex - 1] <
-              matrix[rowIndex === 0 ? 0 : rowIndex - 1][coloumnIndex]
-                ? matrix[rowIndex][coloumnIndex === 0 ? 0 : coloumnIndex - 1]
-                : matrix[rowIndex === 0 ? 0 : rowIndex - 1][coloumnIndex];
+    if (!cellValue) {
+      if (
+        !matrix[rowIndex][coloumnIndex - 1] &&
+        !matrix[rowIndex - 1][coloumnIndex] &&
+        !matrix[rowIndex][coloumnIndex + 1] &&
+        !matrix[rowIndex + 1][coloumnIndex]
+      ) {
+        matrix[rowIndex][coloumnIndex] = land;
+        totalIslandArray.push(land);
+      } else {
+        if (matrix[rowIndex][coloumnIndex - 1]) {
+          neighbourCellsArray.push(matrix[rowIndex][coloumnIndex - 1]);
+        }
+        if (matrix[rowIndex - 1][coloumnIndex]) {
+          neighbourCellsArray.push(matrix[rowIndex - 1][coloumnIndex]);
+        }
+        if (matrix[rowIndex][coloumnIndex + 1]) {
+          neighbourCellsArray.push(matrix[rowIndex][coloumnIndex + 1]);
+        }
+        if (matrix[rowIndex + 1][coloumnIndex]) {
+          neighbourCellsArray.push(matrix[rowIndex + 1][coloumnIndex]);
+        }
+        var smallestNeighbour = Math.min(...neighbourCellsArray);
 
-            if (
-              matrix[rowIndex][coloumnIndex === 0 ? 0 : coloumnIndex - 1] !==
-              matrix[rowIndex === 0 ? 0 : rowIndex - 1][coloumnIndex]
-            ) {
-              equivalency.push([
-                matrix[rowIndex][coloumnIndex === 0 ? 0 : coloumnIndex - 1] >
-                matrix[rowIndex === 0 ? 0 : rowIndex - 1][coloumnIndex]
-                  ? matrix[rowIndex][coloumnIndex === 0 ? 0 : coloumnIndex - 1]
-                  : matrix[rowIndex === 0 ? 0 : rowIndex - 1][coloumnIndex],
-                matrix[rowIndex][coloumnIndex === 0 ? 0 : coloumnIndex - 1] <
-                matrix[rowIndex === 0 ? 0 : rowIndex - 1][coloumnIndex]
-                  ? matrix[rowIndex][coloumnIndex === 0 ? 0 : coloumnIndex - 1]
-                  : matrix[rowIndex === 0 ? 0 : rowIndex - 1][coloumnIndex],
-              ]);
-            }
-          }
+        matrix[rowIndex][coloumnIndex] = smallestNeighbour;
+
+        if (
+          matrix[rowIndex][coloumnIndex - 1] &&
+          matrix[rowIndex][coloumnIndex - 1] !== smallestNeighbour
+        ) {
+          matrix[rowIndex][coloumnIndex - 1] = matrix[rowIndex][coloumnIndex];
+          islandCount(false, rowIndex, coloumnIndex - 1, land);
         }
-      });
-    });
-    equivalency = equivalency.reverse();
-    matrix.forEach((rowCell, rowIndex) => {
-      return rowCell.forEach((columnCell, coloumnIndex) => {
-        for (let i = 0; i < equivalency.length; i++) {
-          if (matrix[rowIndex][coloumnIndex] === equivalency[i][0]) {
-            console.log("eq:", equivalency);
-            console.log(
-              `matrix[${rowIndex}][${coloumnIndex}]=${columnCell}`,
-              equivalency[i]
-            );
-            matrix[rowIndex][coloumnIndex] = equivalency[i][1];
-            console.log(
-              `matrix[${rowIndex}][${coloumnIndex}]=${matrix[rowIndex][coloumnIndex]}`
-            );
-          }
+        if (
+          matrix[rowIndex - 1][coloumnIndex] &&
+          matrix[rowIndex - 1][coloumnIndex] !== smallestNeighbour
+        ) {
+          matrix[rowIndex - 1][coloumnIndex] = matrix[rowIndex][coloumnIndex];
+          islandCount(false, rowIndex - 1, coloumnIndex, land);
         }
-      });
-    });
-    console.log(matrix);
-    matrix.forEach((row) => {
-      return row.forEach((cell) => {
-        if (cell) islasTotalesState2.push(cell);
-      });
-    });
-    const uniq = [...new Set(islasTotalesState2)];
-    console.log("islasTotalesState2", uniq);
-    console.log("islandiassssss", uniq.length);
-    setIslasTotalesState(uniq.length);
+        if (
+          matrix[rowIndex][coloumnIndex + 1] &&
+          matrix[rowIndex][coloumnIndex + 1] !== smallestNeighbour
+        ) {
+          matrix[rowIndex][coloumnIndex + 1] = matrix[rowIndex][coloumnIndex];
+          islandCount(false, rowIndex, coloumnIndex + 1, land);
+        }
+        if (
+          matrix[rowIndex + 1][coloumnIndex] &&
+          matrix[rowIndex + 1][coloumnIndex] !== smallestNeighbour
+        ) {
+          matrix[rowIndex + 1][coloumnIndex] = matrix[rowIndex][coloumnIndex];
+          islandCount(false, rowIndex + 1, coloumnIndex, land);
+        }
+      }
+      if (
+        !neighbourCellsArray.every((item) => {
+          return item === neighbourCellsArray[0];
+        })
+      ) {
+        const neighbourCellsArrayFiltered = neighbourCellsArray.filter(
+          (item) => {
+            return item !== smallestNeighbour;
+          }
+        );
+
+        const totalIslandArrayFiltered =
+          totalIslandArray.length > 1
+            ? totalIslandArray.filter(
+                (item) => !neighbourCellsArrayFiltered.includes(item)
+              )
+            : totalIslandArray;
+
+        setTotalIslandArrayState(totalIslandArrayFiltered);
+        setIslasTotalesState(totalIslandArrayFiltered.length);
+      } else {
+        setTotalIslandArrayState(totalIslandArray);
+        setIslasTotalesState(totalIslandArray.length);
+      }
+    } else {
+      if (
+        !matrix[rowIndex][coloumnIndex - 1] &&
+        !matrix[rowIndex - 1][coloumnIndex] &&
+        !matrix[rowIndex][coloumnIndex + 1] &&
+        !matrix[rowIndex + 1][coloumnIndex]
+      ) {
+        const index = totalIslandArray.indexOf(cellValue);
+        totalIslandArray.splice(index, 1);
+        setTotalIslandArrayState(totalIslandArray);
+        setIslasTotalesState(totalIslandArray.length);
+      } else {
+        let splitIslandStateArr = splitIslandState;
+        totalIslandArray.splice(
+          totalIslandArray.indexOf(matrix[rowIndex][coloumnIndex]),
+          1
+        );
+
+        if (matrix[rowIndex][coloumnIndex - 1]) {
+          totalIslandArray.push(splitIslandStateArr);
+          convertCells(matrix, rowIndex, coloumnIndex - 1, splitIslandStateArr);
+        }
+
+        splitIslandStateArr++;
+
+        if (
+          matrix[rowIndex - 1][coloumnIndex] &&
+          matrix[rowIndex - 1][coloumnIndex] !==
+            matrix[rowIndex][coloumnIndex - 1]
+        ) {
+          console.log("102", splitIslandStateArr);
+          totalIslandArray.push(splitIslandStateArr);
+          convertCells(matrix, rowIndex - 1, coloumnIndex, splitIslandStateArr);
+        }
+
+        splitIslandStateArr++;
+
+        if (
+          matrix[rowIndex][coloumnIndex + 1] &&
+          matrix[rowIndex][coloumnIndex + 1] !==
+            matrix[rowIndex][coloumnIndex - 1] &&
+          matrix[rowIndex][coloumnIndex + 1] !==
+            matrix[rowIndex - 1][coloumnIndex]
+        ) {
+          totalIslandArray.push(splitIslandStateArr);
+          convertCells(matrix, rowIndex, coloumnIndex + 1, splitIslandStateArr);
+        }
+
+        splitIslandStateArr++;
+
+        if (
+          matrix[rowIndex + 1][coloumnIndex] &&
+          matrix[rowIndex + 1][coloumnIndex] !==
+            matrix[rowIndex][coloumnIndex - 1] &&
+          matrix[rowIndex + 1][coloumnIndex] !==
+            matrix[rowIndex - 1][coloumnIndex] &&
+          matrix[rowIndex + 1][coloumnIndex] !==
+            matrix[rowIndex][coloumnIndex + 1]
+        ) {
+          totalIslandArray.push(splitIslandStateArr);
+          convertCells(matrix, rowIndex + 1, coloumnIndex, splitIslandStateArr);
+        }
+
+        splitIslandStateArr++;
+        setTotalIslandArrayState(totalIslandArray);
+        setIslasTotalesState(totalIslandArray.length);
+        setSplitIslandState(splitIslandStateArr);
+      }
+    }
+    setGridState(matrix);
+    return;
+  }
+
+  function convertCells(matrix, rowIndex, coloumnIndex, splitIslandStateArr) {
+    matrix[rowIndex][coloumnIndex] = splitIslandStateArr;
+
+    if (
+      matrix[rowIndex][coloumnIndex - 1] &&
+      matrix[rowIndex][coloumnIndex - 1] !== splitIslandStateArr
+    ) {
+      matrix[rowIndex][coloumnIndex - 1] = matrix[rowIndex][coloumnIndex];
+      convertCells(matrix, rowIndex, coloumnIndex - 1, splitIslandStateArr);
+    }
+
+    if (
+      matrix[rowIndex - 1][coloumnIndex] &&
+      matrix[rowIndex - 1][coloumnIndex] !== splitIslandStateArr
+    ) {
+      matrix[rowIndex - 1][coloumnIndex] = matrix[rowIndex][coloumnIndex];
+      convertCells(matrix, rowIndex - 1, coloumnIndex, splitIslandStateArr);
+    }
+
+    if (
+      matrix[rowIndex][coloumnIndex + 1] &&
+      matrix[rowIndex][coloumnIndex + 1] !== splitIslandStateArr
+    ) {
+      matrix[rowIndex][coloumnIndex + 1] = matrix[rowIndex][coloumnIndex];
+      convertCells(matrix, rowIndex, coloumnIndex + 1, splitIslandStateArr);
+    }
+
+    if (
+      matrix[rowIndex + 1][coloumnIndex] &&
+      matrix[rowIndex + 1][coloumnIndex] !== splitIslandStateArr
+    ) {
+      matrix[rowIndex + 1][coloumnIndex] = matrix[rowIndex][coloumnIndex];
+      convertCells(matrix, rowIndex + 1, coloumnIndex, splitIslandStateArr);
+    }
   }
 
   function toggled(cellValue, rowIndex, coloumnIndex) {
     const matrix = [...gridState];
+    matrix[rowIndex][coloumnIndex] = !cellValue;
     let land = landState;
     cellValue ? land-- : land++;
     setlandState(land);
-    matrix[rowIndex][coloumnIndex] = !matrix[rowIndex][coloumnIndex];
-    setGridState(matrix);
+    islandCount(cellValue, rowIndex, coloumnIndex, land);
   }
 
   function addColumn() {
@@ -148,7 +251,7 @@ export const GridProvider = ({ children }) => {
 
   function removeRow() {
     const matrix = [...gridState];
-    if (matrix.length > 1) {
+    if (matrix.length > 3) {
       matrix.pop();
       setGridState(matrix);
     }
